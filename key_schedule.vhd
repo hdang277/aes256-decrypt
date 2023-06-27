@@ -9,9 +9,9 @@ entity key_schedule is
     tmp_key_main   : in std_logic_vector(255 downto 0)  ;
     clk   : in  std_logic;
 
-    tmp_1 : out std_logic_vector(127 downto 0);
+    keyround : out std_logic_vector(127 downto 0);
    
-    rcon_ct_key : in  std_logic_vector(3 downto 0) 
+    rcon_ct_key : in  std_logic_vector(4 downto 0) 
     
     );
     
@@ -29,7 +29,7 @@ signal tmpkey_6 : std_logic_vector(255 downto 0);
 signal tmpkey_7 : std_logic_vector(255 downto 0);
 
 
---signal key_0 : std_logic_vector(127 downto 0);
+signal key_0 : std_logic_vector(127 downto 0);
 signal key_1 : std_logic_vector(127 downto 0);  
 signal key_2 : std_logic_vector(127 downto 0);      
 signal key_3 : std_logic_vector(127 downto 0);  
@@ -204,24 +204,54 @@ begin
         end if;
        end if;  
        end process;
+    
+        key_0 <= tmp_key_main(255 downto 128);
+        key_1 <= tmp_key_main(127 downto 0);
+        key_2 <= tmpkey_1(255 downto 128);
+        key_3 <= tmpkey_1(127 downto 0);
+        key_4 <= tmpkey_2(255 downto 128);
+        key_5 <= tmpkey_2(127 downto 0);
+        key_6 <= tmpkey_3(255 downto 128);
+        key_7 <= tmpkey_3(127 downto 0);
+        key_8 <= tmpkey_4(255 downto 128);
+        key_9 <= tmpkey_4(127 downto 0);
+        key_10 <= tmpkey_5(255 downto 128);
+        key_11 <= tmpkey_5(127 downto 0);
+        key_12 <= tmpkey_6(255 downto 128);
+        key_13 <= tmpkey_6(127 downto 0);
+        key_14 <= tmpkey_7(255 downto 128);
+        
+--    tmp_1  <= tmpkey_7(255 downto 128) when rcon_ct_key = "0001" else   --key14
+--              tmpkey_6(127 downto 0) when rcon_ct_key = "0010" else     --key13
+--              tmpkey_6(255 downto 128) when rcon_ct_key = "0011" else   --key12
+--              tmpkey_5(127 downto 0) when rcon_ct_key = "0100" else     --key11
+--              tmpkey_5(255 downto 128) when rcon_ct_key = "0101" else   --key10
+--              tmpkey_4(127 downto 0) when rcon_ct_key = "0110" else     --key9 
+--              tmpkey_4(255 downto 128) when rcon_ct_key = "0111" else   --key8
+--              tmpkey_3(127 downto 0) when rcon_ct_key = "1000" else     --key7
+--              tmpkey_3(255 downto 128) when rcon_ct_key = "1001" else   --key6
+--              tmpkey_2(127 downto 0) when rcon_ct_key = "1010" else     --key5
+--              tmpkey_2(255 downto 128) when rcon_ct_key = "1011" else   --key4
+--              tmpkey_1(127 downto 0)  when rcon_ct_key = "1100" else    --key3
+--              tmpkey_1(255 downto 128) when rcon_ct_key = "1101" else    --key2
+--              tmp_key_main(127 downto 0) when rcon_ct_key = "1110" else  --key1          
+--              tmp_key_main(255 downto 128);                              --key0
 
-	
-
-    tmp_1  <= tmpkey_7(255 downto 128) when rcon_ct_key = "0001" else   --key14
-              tmpkey_6(127 downto 0) when rcon_ct_key = "0010" else     --key13
-              tmpkey_6(255 downto 128) when rcon_ct_key = "0011" else   --key12
-              tmpkey_5(127 downto 0) when rcon_ct_key = "0100" else     --key11
-              tmpkey_5(255 downto 128) when rcon_ct_key = "0101" else   --key10
-              tmpkey_4(127 downto 0) when rcon_ct_key = "0110" else     --key9 
-              tmpkey_4(255 downto 128) when rcon_ct_key = "0111" else   --key8
-              tmpkey_3(127 downto 0) when rcon_ct_key = "1000" else     --key7
-              tmpkey_3(255 downto 128) when rcon_ct_key = "1001" else   --key6
-              tmpkey_2(127 downto 0) when rcon_ct_key = "1010" else     --key5
-              tmpkey_2(255 downto 128) when rcon_ct_key = "1011" else   --key4
-              tmpkey_1(127 downto 0)  when rcon_ct_key = "1100" else    --key3
-              tmpkey_1(255 downto 128) when rcon_ct_key = "1101" else    --key2
-              tmp_key_main(127 downto 0) when rcon_ct_key = "1110" else  --key1          
-              tmp_key_main(255 downto 128);                              --key0
+            keyround  <= key_14 when rcon_ct_key = "00111" else   --7
+                      key_13 when rcon_ct_key = "01000" else     --8
+                      key_12 when rcon_ct_key = "01001" else   --9
+                      key_11 when rcon_ct_key = "01010" else     --10
+                      key_10 when rcon_ct_key = "01011" else   --11
+                      key_9 when rcon_ct_key = "01100" else     --12
+                      key_8 when rcon_ct_key = "01101" else   --13
+                      key_7 when rcon_ct_key = "01110" else     --14
+                      key_6 when rcon_ct_key = "01111" else   --15
+                      key_5 when rcon_ct_key = "10000" else     --16
+                      key_4 when rcon_ct_key = "10001" else   --17
+                      key_3  when rcon_ct_key = "10010" else    --18
+                      key_2 when rcon_ct_key = "10011" else    --19
+                      key_1 when rcon_ct_key = "10100" else  --20        
+                      key_0;                              --21
     
    
 end architecture;

@@ -2,15 +2,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
-
 entity tb_main is
 --  Port ( );
 end tb_main;
@@ -68,7 +59,7 @@ stim_proc: process
         -- key         <= x"43a564b5634e55634f6534e32324f132" ; -- example  2
         -- key         <= x"ad2387b5e4f678435813798132aed6c5" ; -- example  3
         
-    wait for clock_period*28;
+    wait for clock_period*30;
        wait;  
 
     end process;
