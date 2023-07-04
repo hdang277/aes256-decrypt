@@ -251,7 +251,7 @@ begin
                       key_3  when rcon_ct_key = "10010" else    --18
                       key_2 when rcon_ct_key = "10011" else    --19
                       key_1 when rcon_ct_key = "10100" else  --20        
-                      key_0;                              --21
+                      key_0 when rcon_ct_key = "10101";
     
    
 end architecture;
