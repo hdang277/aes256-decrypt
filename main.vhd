@@ -95,7 +95,7 @@ KEY_MODULE: key_schedule port map(
                     state <= KEY_GEN;
                 
                 elsif(rcon_ct_key = "10110") then  -- round= 22 
-                        plaintext <= tmpin;
+                        plaintext <= output;
                 
                 end if;
                     
